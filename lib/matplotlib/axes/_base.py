@@ -2675,6 +2675,8 @@ class _AxesBase(martist.Artist):
             artists = [a for a in artists
                        if not a.get_animated() or a in self.images]
         artists = sorted(artists, key=attrgetter('zorder'))
+    
+
 
         # rasterize artists with negative zorder
         # if the minimum zorder is negative, start rasterization
@@ -2795,7 +2797,7 @@ class _AxesBase(martist.Artist):
         elif axisbelow is False:
             zorder = 2.5
         elif axisbelow == "line":
-            zorder = 1.5
+            zorder = 2
         else:
             raise ValueError("Unexpected axisbelow value")
         for axis in self._get_axis_list():
