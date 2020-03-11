@@ -2674,6 +2674,13 @@ class _AxesBase(martist.Artist):
         if not self.figure.canvas.is_saving():
             artists = [a for a in artists
                        if not a.get_animated() or a in self.images]
+
+        # Get ticks from the axes, and add them to the list of artists
+        ticks = self.axes.xaxis.get_ticklabels() + self.axes.yaxis.get_ticklabels() 
+
+        for tick in ticks:
+            artists.append(tick)
+
         artists = sorted(artists, key=attrgetter('zorder'))
 
         # rasterize artists with negative zorder

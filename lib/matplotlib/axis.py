@@ -1143,8 +1143,8 @@ class Axis(martist.Artist):
         ticklabelBoxes, ticklabelBoxes2 = self._get_tick_bboxes(ticks_to_draw,
                                                                 renderer)
 
-        for tick in ticks_to_draw:
-            tick.draw(renderer)
+        # for tick in ticks_to_draw: // Don't want to draw ticks inside of axes, since its been seperated out
+        #     tick.draw(renderer)
 
         # scale up the axis label box to also find the neighbors, not
         # just the tick labels that actually overlap note we need a
@@ -1344,7 +1344,7 @@ class Axis(martist.Artist):
             self.majorTicks.append(tick)
             tick.gridline.set_visible(self._gridOnMajor)
             self._copy_tick_props(self.majorTicks[0], tick)
-
+            
         return self.majorTicks[:numticks]
 
     def get_minor_ticks(self, numticks=None):
