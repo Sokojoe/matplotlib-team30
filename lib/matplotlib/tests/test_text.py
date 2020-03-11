@@ -653,3 +653,10 @@ def test_buffer_size(fig_test, fig_ref):
     ax = fig_ref.add_subplot()
     ax.set_yticks([0, 1])
     ax.set_yticklabels(["€", ""])
+
+
+def test_fontproperties_priority():
+    plt.figure()
+    t1 = plt.xlabel("value", fontproperties='DejaVu Sans', size=20)
+    t2 = plt.ylabel("counts", size=20, fontproperties='DejaVu Sans')
+    assert t1.get_size() == t2.get_size()
