@@ -2675,11 +2675,20 @@ class _AxesBase(martist.Artist):
             artists = [a for a in artists
                        if not a.get_animated() or a in self.images]
 
-        # Get ticks from the axes, and add them to the list of artists
-        ticks = self.axes.xaxis.get_ticklabels() + self.axes.yaxis.get_ticklabels() 
-
-        for tick in ticks:
-            artists.append(tick)
+        # # Get ticks from the axes, and add them to the list of artists
+        # ticks = self.axes.xaxis.get_ticklabels(which="both") + self.axes.yaxis.get_ticklabels(which="both")
+        # for child in self.child_axes:
+        #     ticks += child.axes.xaxis.get_ticklabels(which="both")
+        #     ticks += child.axes.yaxis.get_ticklabels(which="both")
+        #
+        #     if hasattr(child.axes, 'zaxis'):
+        #         ticks += child.axes.zaxis.get_ticklabels(which="both")
+        #
+        # if hasattr(self.axes, 'zaxis'):
+        #     ticks += self.axes.zaxis.get_ticklabels(which="both")
+        #
+        # for tick in ticks:
+        #     artists.append(tick)
 
         artists = sorted(artists, key=attrgetter('zorder'))
 
