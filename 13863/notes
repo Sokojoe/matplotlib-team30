@@ -1,0 +1,12 @@
+according to mpl api docs, lower zorder gets drawn first
+
+xticklabel zorder is 3
+line zorder is 2
+- so technically line should be drawn first, xtick on top
+    - but thats not the case...
+
+in example screenshot
+    - pink line has zorder 1
+    - red line has zorder 2
+    - pitick has zorder 3
+    - pitick bbox has zorder 4
