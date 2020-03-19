@@ -1337,14 +1337,14 @@ class _AxesBase(martist.Artist):
                    *self._shared_y_axes.get_siblings(self)}
         else:
             axs = [self]
-        if (adjustable == "datalim"
-                and any(getattr(ax.get_data_ratio, "__func__", None)
-                        != _AxesBase.get_data_ratio
-                        for ax in axs)):
-            # Limits adjustment by apply_aspect assumes that the axes' aspect
-            # ratio can be computed from the data limits and scales.
-            raise ValueError("Cannot set axes adjustable to 'datalim' for "
-                             "Axes which override 'get_data_ratio'")
+        # if (adjustable == "datalim"
+        #         and any(getattr(ax.get_data_ratio, "__func__", None)
+        #                 != _AxesBase.get_data_ratio
+        #                 for ax in axs)):
+        #     # Limits adjustment by apply_aspect assumes that the axes' aspect
+        #     # ratio can be computed from the data limits and scales.
+        #     raise ValueError("Cannot set axes adjustable to 'datalim' for "
+        #                      "Axes which override 'get_data_ratio'")
         for ax in axs:
             ax._adjustable = adjustable
         self.stale = True
@@ -4481,6 +4481,21 @@ class _AxesBase(martist.Artist):
         ax2.xaxis.set_visible(False)
         ax2.patch.set_visible(False)
         return ax2
+
+    def twintheta(self):
+        ax2 = self.figure.add_axes(self.get_position(), projection='polar', label='twin', frameon=False,
+                                    theta_direction=self.get_theta_direction(),
+                                    theta_offset=self.get_theta_offset())
+        ax2.xaxis.set_visible(False)
+        ax2.set_rlabel_position(180 - 22.5)
+
+        ax2.set_rlim([0, 30]) 
+        # We need to dynamically set the rlim in 
+        # such a way that the gridlines line up with those 
+        # from the original radial axis
+        
+        return ax2
+    
 
     def twiny(self):
         """

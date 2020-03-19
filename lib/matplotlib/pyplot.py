@@ -1236,6 +1236,8 @@ def twinx(ax=None):
     ax1 = ax.twinx()
     return ax1
 
+def twintheta(ax):
+    return ax.twintheta()
 
 def twiny(ax=None):
     """
