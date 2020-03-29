@@ -31,8 +31,10 @@ import numpy as np
 from matplotlib import cbook
 from matplotlib.lines import Line2D
 from matplotlib.patches import Rectangle
+from matplotlib.quiver import QuiverKey
 import matplotlib.collections as mcoll
 import matplotlib.colors as mcolors
+
 
 
 def update_from_first_child(tgt, src):
@@ -727,4 +729,31 @@ class HandlerPolyCollection(HandlerBase):
                       width=width, height=height)
         self.update_prop(p, orig_handle, legend)
         p.set_transform(trans)
+        return [p]
+
+class HandlerQuiverKey(HandlerBase): 
+    """
+    """
+
+    def _update_prop_func(self, legend_handle, orig_handle):
+        # Need to pass all settings from original handle to new one here 
+        return
+
+    def create_artists(self, legend, orig_handle, 
+                        xdescent, ydescent, width, height, fontsize, trans):
+        
+        orig_handle._init()
+
+        p = mcoll.PolyCollection(
+                                    orig_handle.verts,
+                                )
+
+        p.set_transform(trans)
+        
+        # Hide original vector + label
+        orig_handle.vector.set_visible(False)
+        orig_handle.text.set_visible(False)
+
+        # self.update_prop(p, orig_handle, legend)
+
         return [p]

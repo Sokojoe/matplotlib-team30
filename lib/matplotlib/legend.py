@@ -45,6 +45,8 @@ from matplotlib.offsetbox import DraggableOffsetBox
 from matplotlib.container import ErrorbarContainer, BarContainer, StemContainer
 from . import legend_handler
 
+from matplotlib.quiver import QuiverKey
+
 
 class DraggableLegend(DraggableOffsetBox):
     def __init__(self, legend, use_blit=False, update="loc"):
@@ -611,7 +613,8 @@ class Legend(Artist):
             update_func=legend_handler.update_from_first_child),
         tuple: legend_handler.HandlerTuple(),
         PathCollection: legend_handler.HandlerPathCollection(),
-        PolyCollection: legend_handler.HandlerPolyCollection()
+        PolyCollection: legend_handler.HandlerPolyCollection(),
+        QuiverKey: legend_handler.HandlerQuiverKey()
         }
 
     # (get|set|update)_default_handler_maps are public interfaces to
