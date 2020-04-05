@@ -1,8 +1,10 @@
 import numpy as np
 import pytest
 import sys
+import matplotlib.colors as mcolors
 from matplotlib import pyplot as plt
 from matplotlib.testing.decorators import image_comparison
+
 
 
 def draw_quiver(ax, **kw):
@@ -259,3 +261,40 @@ def test_quiver_setuvc_numbers():
 
     q = ax.quiver(X, Y, U, V)
     q.set_UVC(0, 1)
+
+@image_comparison([''], remove_text=True)
+def test_quiverkey_legend():
+    """ """
+    fig, ax = plt.subplots()
+
+    Q = draw_quiver(ax)
+
+    qk = ax.quiverkey(Q, 0.9, 0.8, U=10, label='QK length = 10', labelpos='E')
+
+    legend_elements = [
+        qk
+    ]
+
+    ax.legend(handles=legend_elements, loc='upper right')
+
+    plt.show()
+
+def test_quiverkey_legend_props():
+    fig, ax = plt.subplots()
+
+    Q = draw_quiver(ax)
+
+    qk = ax.quiverkey(Q, 0.9, 0.8, U=10, label='QK length = 10', labelpos='E')
+
+    legend_elements = [
+        qk
+    ]
+
+    l = ax.legend(handles=legend_elements, loc='upper right')
+
+    qk_l = l.get_quiverkeys()[0]
+
+    assert qk_l.U == 10
+    assert mcolors.same_color(qk_l.color, qk.color)
+
+
