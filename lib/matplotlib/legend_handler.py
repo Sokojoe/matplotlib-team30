@@ -299,6 +299,7 @@ class HandlerPatch(HandlerBase):
 
     def create_artists(self, legend, orig_handle,
                        xdescent, ydescent, width, height, fontsize, trans):
+        print(width, height)
         p = self._create_patch(legend, orig_handle,
                                xdescent, ydescent, width, height, fontsize)
         self.update_prop(p, orig_handle, legend)
@@ -731,29 +732,34 @@ class HandlerPolyCollection(HandlerBase):
         p.set_transform(trans)
         return [p]
 
-class HandlerQuiverKey(HandlerBase): 
+
+class HandlerQuiverKey(HandlerBase):
     """
     """
 
-    def _update_prop_func(self, legend_handle, orig_handle):
-        # Need to pass all settings from original handle to new one here 
-        return
+    # def _update_prop(self, legend_handle: QuiverKey, orig_handle: QuiverKey):
+    #     # Need to pass all settings from original handle to new one here
+    #     legend_handle.update_from(orig_handle)
+    #     print("HERE")
+    #     # orig_handle.remove()
+    #     return legend_handle
 
-    def create_artists(self, legend, orig_handle, 
+    def create_artists(self, legend, orig_handle: QuiverKey,
                         xdescent, ydescent, width, height, fontsize, trans):
-        
-        orig_handle._init()
+        print(width, height)
+        q = QuiverKey(orig_handle.Q, 0, 0, 0, '')
+        self.update_prop(q, orig_handle, legend)
+        q.labelpos = 'E'
+        q.coord = trans
+        q.X = -xdescent
+        q.Y = -ydescent
+        q._init()
+        # q.X += width
+        # q.Y += height
 
-        p = mcoll.PolyCollection(
-                                    orig_handle.verts,
-                                )
-
-        p.set_transform(trans)
-        
         # Hide original vector + label
-        orig_handle.vector.set_visible(False)
-        orig_handle.text.set_visible(False)
-
-        # self.update_prop(p, orig_handle, legend)
-
-        return [p]
+        try:
+            orig_handle.remove()
+        except:
+            pass
+        return [q]
