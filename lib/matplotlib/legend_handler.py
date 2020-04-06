@@ -36,7 +36,6 @@ import matplotlib.collections as mcoll
 import matplotlib.colors as mcolors
 
 
-
 def update_from_first_child(tgt, src):
     first_child = next(iter(src.get_children()), None)
     if first_child is not None:
