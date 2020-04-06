@@ -258,6 +258,7 @@ class QuiverKey(martist.Artist):
         self.coord = coordinates
         self.color = color
         self.label = label
+        self._label = label
         self._labelsep_inches = labelsep
         self.labelsep = (self._labelsep_inches * Q.ax.figure.dpi)
 
@@ -291,6 +292,30 @@ class QuiverKey(martist.Artist):
             self.text.set_color(self.labelcolor)
         self._initialized = False
         self.zorder = Q.zorder + 0.1
+
+    def update_from(self, other):
+        """
+        Copy over quiver key specific properties
+        """
+        super().update_from(other)
+        self.Q = other.Q
+        self.X = other.X
+        self.Y = other.Y
+        self.U = other.U
+        self.angle = other.angle
+        self.coord = other.coord
+        self.color = other.color
+        self.label = other.label
+        self._labelsep_inches = other._labelsep_inches
+        self.labelsep = other.labelsep
+        self.labelpos = other.labelpos
+        self.labelcolor = other.labelcolor
+        self.fontproperties = other.fontproperties
+        self.kw = other.kw
+        self.text = other.text
+        self._initialized = False
+        self.zorder = other.zorder
+        return self
 
     def remove(self):
         """
@@ -363,6 +388,8 @@ class QuiverKey(martist.Artist):
             self.set_transform(self.Q.ax.figure.transFigure)
         elif self.coord == 'inches':
             self.set_transform(self.Q.ax.figure.dpi_scale_trans)
+        elif isinstance(self.coord, transforms.AffineBase):
+            self.set_transform(self.coord)
         else:
             raise ValueError('unrecognized coordinates')
 

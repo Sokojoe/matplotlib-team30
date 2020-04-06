@@ -731,29 +731,30 @@ class HandlerPolyCollection(HandlerBase):
         p.set_transform(trans)
         return [p]
 
-class HandlerQuiverKey(HandlerBase): 
+
+class HandlerQuiverKey(HandlerBase):
     """
     """
 
-    def _update_prop_func(self, legend_handle, orig_handle):
-        # Need to pass all settings from original handle to new one here 
-        return
-
-    def create_artists(self, legend, orig_handle, 
+    def create_artists(self, legend, orig_handle: QuiverKey,
                         xdescent, ydescent, width, height, fontsize, trans):
-        
-        orig_handle._init()
+        q = QuiverKey(orig_handle.Q, 0, 0, width, '')
+        text = q.text
+        self.update_prop(q, orig_handle, legend)
+        q.text = text
+        q.coord = trans
+        q.X = -xdescent + (width / 2)
+        q.Y = -ydescent + (height / 2) - 0.5
 
-        p = mcoll.PolyCollection(
-                                    orig_handle.verts,
-                                )
+        # we force labelpos to be 'N' so that quiverkey draws the center
+        # of the arrow at (q.X, q.Y) and q.angle rotates the arrow
+        # around the midpoint
+        q.labelpos = 'N'
+        q._init()
 
-        p.set_transform(trans)
-        
         # Hide original vector + label
-        orig_handle.vector.set_visible(False)
-        orig_handle.text.set_visible(False)
-
-        # self.update_prop(p, orig_handle, legend)
-
-        return [p]
+        try:
+            orig_handle.remove()
+        except:
+            pass
+        return [q]
