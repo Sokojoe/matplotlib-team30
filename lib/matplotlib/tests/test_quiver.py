@@ -262,7 +262,7 @@ def test_quiver_setuvc_numbers():
     q = ax.quiver(X, Y, U, V)
     q.set_UVC(0, 1)
 
-@image_comparison([''], remove_text=True)
+@image_comparison(['quiverkey_legend.png'], remove_text=True)
 def test_quiverkey_legend():
     """ """
     fig, ax = plt.subplots()
@@ -276,8 +276,6 @@ def test_quiverkey_legend():
     ]
 
     ax.legend(handles=legend_elements, loc='upper right')
-
-    plt.show()
 
 def test_quiverkey_legend_props():
     fig, ax = plt.subplots()
