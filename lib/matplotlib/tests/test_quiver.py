@@ -294,5 +294,5 @@ def test_quiverkey_legend_props():
 
     qk_l = l.get_quiverkeys()[0]
 
-    assert qk_l.U == 10
+    assert qk_l.U == qk.U
     assert mcolors.same_color(qk_l.color, qk.color)
