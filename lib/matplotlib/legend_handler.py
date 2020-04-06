@@ -743,8 +743,13 @@ class HandlerQuiverKey(HandlerBase):
         self.update_prop(q, orig_handle, legend)
         q.text = text
         q.coord = trans
-        q.X = -xdescent + width + 0.5
+        q.X = -xdescent + (width / 2)
         q.Y = -ydescent + (height / 2) - 0.5
+
+        # we force labelpos to be 'N' so that quiverkey draws the center
+        # of the arrow at (q.X, q.Y) and q.angle rotates the arrow
+        # around the midpoint
+        q.labelpos = 'N'
         q._init()
 
         # Hide original vector + label
