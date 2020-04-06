@@ -294,3 +294,5 @@ def test_quiverkey_legend_props():
 
     assert qk_l.U == qk.U
     assert mcolors.same_color(qk_l.color, qk.color)
+    assert qk_l.angle == qk.angle
+    assert qk_l.labelsep == qk.labelsep
