@@ -279,7 +279,24 @@ def test_quiverkey_legend():
 
     plt.show()
 
-def test_quiverkey_legend_props():
+def test_quiverkey_legend_prop_U():
+    fig, ax = plt.subplots()
+
+    Q = draw_quiver(ax)
+
+    qk = ax.quiverkey(Q, 0.9, 0.8, U=10, label='QK length = 10', labelpos='E')
+
+    legend_elements = [
+        qk
+    ]
+
+    l = ax.legend(handles=legend_elements, loc='upper right')
+
+    qk_l = l.get_quiverkeys()[0]
+
+    assert qk_l.U == qk.U
+
+def test_quiverkey_legend_prop_color():
     fig, ax = plt.subplots()
 
     Q = draw_quiver(ax)
@@ -294,5 +311,38 @@ def test_quiverkey_legend_props():
 
     qk_l = l.get_quiverkeys()[0]
 
-    assert qk_l.U == qk.U
     assert mcolors.same_color(qk_l.color, qk.color)
+
+def test_quiverkey_legend_prop_angle():
+    fig, ax = plt.subplots()
+
+    Q = draw_quiver(ax)
+
+    qk = ax.quiverkey(Q, 0.9, 0.8, U=10, label='QK length = 10', labelpos='E')
+
+    legend_elements = [
+        qk
+    ]
+
+    l = ax.legend(handles=legend_elements, loc='upper right')
+
+    qk_l = l.get_quiverkeys()[0]
+
+    assert qk_l.angle == qk.angle
+
+def test_quiverkey_legend_prop_labelsep():
+    fig, ax = plt.subplots()
+
+    Q = draw_quiver(ax)
+
+    qk = ax.quiverkey(Q, 0.9, 0.8, U=10, label='QK length = 10', labelpos='E')
+
+    legend_elements = [
+        qk
+    ]
+
+    l = ax.legend(handles=legend_elements, loc='upper right')
+
+    qk_l = l.get_quiverkeys()[0]
+
+    assert qk_l.labelsep == qk.labelsep
