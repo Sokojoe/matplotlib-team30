@@ -258,6 +258,7 @@ class QuiverKey(martist.Artist):
         self.coord = coordinates
         self.color = color
         self.label = label
+        self._label = label
         self._labelsep_inches = labelsep
         self.labelsep = (self._labelsep_inches * Q.ax.figure.dpi)
 

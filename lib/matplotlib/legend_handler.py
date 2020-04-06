@@ -299,7 +299,6 @@ class HandlerPatch(HandlerBase):
 
     def create_artists(self, legend, orig_handle,
                        xdescent, ydescent, width, height, fontsize, trans):
-        print(width, height)
         p = self._create_patch(legend, orig_handle,
                                xdescent, ydescent, width, height, fontsize)
         self.update_prop(p, orig_handle, legend)
@@ -737,25 +736,16 @@ class HandlerQuiverKey(HandlerBase):
     """
     """
 
-    # def _update_prop(self, legend_handle: QuiverKey, orig_handle: QuiverKey):
-    #     # Need to pass all settings from original handle to new one here
-    #     legend_handle.update_from(orig_handle)
-    #     print("HERE")
-    #     # orig_handle.remove()
-    #     return legend_handle
-
     def create_artists(self, legend, orig_handle: QuiverKey,
                         xdescent, ydescent, width, height, fontsize, trans):
-        print(width, height)
-        q = QuiverKey(orig_handle.Q, 0, 0, 0, '')
+        q = QuiverKey(orig_handle.Q, 0, 0, width, '')
+        text = q.text
         self.update_prop(q, orig_handle, legend)
-        q.labelpos = 'E'
+        q.text = text
         q.coord = trans
-        q.X = -xdescent
-        q.Y = -ydescent
+        q.X = -xdescent + width + 0.5
+        q.Y = -ydescent + (height / 2) - 0.5
         q._init()
-        # q.X += width
-        # q.Y += height
 
         # Hide original vector + label
         try:
