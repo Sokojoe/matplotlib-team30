@@ -283,8 +283,8 @@ def test_quiverkey_legend_props():
 
     Q = draw_quiver(ax)
 
-    qk = ax.quiverkey(Q, 0.9, 0.8, U=10, 
-        label='QK length = 10', labelpos='E', color='red')
+    qk = ax.quiverkey(Q, 0.9, 0.8, U=10,
+                      label='length = 10', labelpos='E', color='red')
 
     legend_elements = [
         qk
