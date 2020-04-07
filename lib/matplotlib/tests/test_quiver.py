@@ -278,7 +278,7 @@ def test_quiverkey_legend():
     ax.legend(handles=legend_elements, loc='upper right')
 
 
-@image_comparison(['quiverkey_legend.png'], remove_text=True)
+@image_comparison([''], remove_text=True)
 def test_quiverkey_legend_label():
     """ """
     fig, ax = plt.subplots()
