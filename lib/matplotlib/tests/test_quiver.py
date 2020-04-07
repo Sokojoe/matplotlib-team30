@@ -278,6 +278,22 @@ def test_quiverkey_legend():
     ax.legend(handles=legend_elements, loc='upper right')
 
 
+@image_comparison(['quiverkey_legend.png'], remove_text=True)
+def test_quiverkey_legend_label():
+    """ """
+    fig, ax = plt.subplots()
+
+    Q = draw_quiver(ax)
+
+    qk = ax.quiverkey(Q, 0.9, 0.8, U=10, label='QK length = 10', labelpos='E')
+
+    legend_elements = [
+        qk
+    ]
+
+    ax.legend(handles=legend_elements, labels=['new label'], loc='upper right')
+
+
 def test_quiverkey_legend_props():
     fig, ax = plt.subplots()
 
