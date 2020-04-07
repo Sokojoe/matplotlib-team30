@@ -847,6 +847,10 @@ class Legend(Artist):
                            [h for h in self.legendHandles
                             if isinstance(h, Patch)])
 
+    def get_quiverkeys(self):
+        r"""Return the list of `~.quiver.QuiverKey`\s in the legend."""
+        return [h for h in self.legendHandles if isinstance(h, QuiverKey)]
+
     def get_texts(self):
         r"""Return the list of `~.text.Text`\s in the legend."""
         return silent_list('Text', self.texts)
