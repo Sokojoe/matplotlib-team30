@@ -22,7 +22,7 @@ U, V = np.meshgrid(X, Y)
 # Adding the quiver key to the legend
 # ===================================
 #
-# To add the quiverkey to a legend, simply pass it as a handler
+# To add the quiverkey to a legend, simply pass it as a handle
 # to :func:`~matplotlib.pyplot.legend`.
 #
 # Note that the quiverkey coordinates provided via the X and Y
@@ -42,8 +42,8 @@ plt.show()
 # Customizing the quiver key
 # ==========================
 #
-# The other (non-positional) git parameters that `~.axes.Axes.quiverkey` accepts are
-# preserved, however.
+# The other (non-positional) git parameters that `~.axes.Axes.quiverkey`
+# accepts are preserved, however.
 
 fig, ax2 = plt.subplots()
 M = np.hypot(U, V)
@@ -76,3 +76,20 @@ ax3.legend(handles=[qk], loc='upper center', handlelength=2, borderpad=1.2)
 ax3.set_title('Use legend\'s parameters to fit larger quiver keys')
 
 plt.show()
+
+#############################################################################
+#
+# ------------
+#
+# References
+# """"""""""
+#
+# The use of the following functions and methods is shown in this example:
+
+import matplotlib
+matplotlib.axes.Axes.quiver
+matplotlib.pyplot.quiver
+matplotlib.axes.Axes.quiverkey
+matplotlib.pyplot.quiverkey
+matplotlib.axes.Axes.legend
+matplotlib.pyplot.legend
