@@ -6,7 +6,6 @@ from matplotlib import pyplot as plt
 from matplotlib.testing.decorators import image_comparison
 
 
-
 def draw_quiver(ax, **kw):
     X, Y = np.meshgrid(np.arange(0, 2 * np.pi, 1),
                        np.arange(0, 2 * np.pi, 1))
@@ -262,6 +261,7 @@ def test_quiver_setuvc_numbers():
     q = ax.quiver(X, Y, U, V)
     q.set_UVC(0, 1)
 
+
 @image_comparison(['quiverkey_legend.png'], remove_text=True)
 def test_quiverkey_legend():
     """ """
@@ -277,12 +277,14 @@ def test_quiverkey_legend():
 
     ax.legend(handles=legend_elements, loc='upper right')
 
+
 def test_quiverkey_legend_props():
     fig, ax = plt.subplots()
 
     Q = draw_quiver(ax)
 
-    qk = ax.quiverkey(Q, 0.9, 0.8, U=10, label='QK length = 10', labelpos='E', color='red')
+    qk = ax.quiverkey(Q, 0.9, 0.8, U=10, 
+        label='QK length = 10', labelpos='E', color='red')
 
     legend_elements = [
         qk
