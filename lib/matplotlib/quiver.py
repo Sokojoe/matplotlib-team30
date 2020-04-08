@@ -231,7 +231,9 @@ class QuiverKey(martist.Artist):
             (1, 1) in the upper right; 'data' are the axes data coordinates
             (used for the locations of the vectors in the quiver plot itself);
             'inches' is position in the figure in inches, with (0, 0) at the
-            lower left corner.
+            lower left corner.\n
+            Can also directly accept an `matplotlib.transforms.AffineBase` if
+            a custom coordinate system is needed.
         color : color
             Overrides face and edge colors from *Q*.
         labelpos : {'N', 'S', 'E', 'W'}
