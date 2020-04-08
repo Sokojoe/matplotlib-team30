@@ -31,6 +31,7 @@ import numpy as np
 from matplotlib import cbook
 from matplotlib.lines import Line2D
 from matplotlib.patches import Rectangle
+from matplotlib.quiver import QuiverKey
 import matplotlib.collections as mcoll
 import matplotlib.colors as mcolors
 
@@ -728,3 +729,35 @@ class HandlerPolyCollection(HandlerBase):
         self.update_prop(p, orig_handle, legend)
         p.set_transform(trans)
         return [p]
+
+
+class HandlerQuiverKey(HandlerBase):
+    """
+    Handler for `.QuiverKey` used in `~.Axes.quiver`
+    """
+
+    def create_artists(self, legend, orig_handle: QuiverKey,
+                        xdescent, ydescent, width, height, fontsize, trans):
+        q = QuiverKey(orig_handle.Q, 0, 0, width, '')
+
+        text = q.text
+        self.update_prop(q, orig_handle, legend)
+        # Reassign empty text because it was overwritten by update_prop
+        q.text = text
+
+        q.coord = trans
+        q.X = -xdescent + (width / 2)
+        q.Y = -ydescent + (height / 2) - 0.5
+
+        # we force labelpos to be 'N' so that quiverkey draws the center
+        # of the arrow at (q.X, q.Y) and q.angle rotates the arrow
+        # around the midpoint
+        q.labelpos = 'N'
+        q._init()
+
+        # Hide original vector + label
+        try:
+            orig_handle.remove()
+        except:
+            pass
+        return [q]
