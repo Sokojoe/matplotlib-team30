@@ -733,14 +733,18 @@ class HandlerPolyCollection(HandlerBase):
 
 class HandlerQuiverKey(HandlerBase):
     """
+    Handler for `.QuiverKey` used in `~.Axes.quiver`
     """
 
     def create_artists(self, legend, orig_handle: QuiverKey,
                         xdescent, ydescent, width, height, fontsize, trans):
         q = QuiverKey(orig_handle.Q, 0, 0, width, '')
+
         text = q.text
         self.update_prop(q, orig_handle, legend)
+        # Reassign empty text because it was overwritten by update_prop
         q.text = text
+
         q.coord = trans
         q.X = -xdescent + (width / 2)
         q.Y = -ydescent + (height / 2) - 0.5
